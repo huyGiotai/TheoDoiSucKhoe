@@ -110,6 +110,7 @@ namespace GUI
             this.mnu_phieusuckhoe.Name = "mnu_phieusuckhoe";
             this.mnu_phieusuckhoe.Size = new System.Drawing.Size(210, 25);
             this.mnu_phieusuckhoe.Text = "Phiếu sức khỏe      ";
+            this.mnu_phieusuckhoe.Click += new System.EventHandler(this.mnu_phieusuckhoe_Click);
             // 
             // mnu_muctieu
             // 

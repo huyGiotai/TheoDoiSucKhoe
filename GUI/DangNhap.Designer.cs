@@ -37,16 +37,15 @@
             this.button_thoat = new System.Windows.Forms.Button();
             this.checkBox_hienthi = new System.Windows.Forms.CheckBox();
             this.linkLabel_dangki = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_quenmatkhau = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label_taikhoan = new System.Windows.Forms.Label();
             this.label_matkhau = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -134,16 +133,6 @@
             this.linkLabel_dangki.Text = "Bạn đã có tài khoản chưa? Nhấp vào đây để đăng kí\r\n";
             this.linkLabel_dangki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_dangki_LinkClicked);
             // 
-            // linkLabel_quenmatkhau
-            // 
-            this.linkLabel_quenmatkhau.AutoSize = true;
-            this.linkLabel_quenmatkhau.Location = new System.Drawing.Point(378, 204);
-            this.linkLabel_quenmatkhau.Name = "linkLabel_quenmatkhau";
-            this.linkLabel_quenmatkhau.Size = new System.Drawing.Size(108, 17);
-            this.linkLabel_quenmatkhau.TabIndex = 9;
-            this.linkLabel_quenmatkhau.TabStop = true;
-            this.linkLabel_quenmatkhau.Text = "Quên mật khẩu\r\n";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox1);
@@ -153,12 +142,23 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pictureBox1.Image = global::GUI.Properties.Resources.Streamlineicons_Streamline_Ux_Free_Doctor_hospital_512;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(377, 319);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.label_taikhoan);
             this.groupBox2.Controls.Add(this.textBox_taikhoan);
-            this.groupBox2.Controls.Add(this.linkLabel_quenmatkhau);
             this.groupBox2.Controls.Add(this.label_matkhau);
             this.groupBox2.Controls.Add(this.linkLabel_dangki);
             this.groupBox2.Controls.Add(this.textBox_matkhau);
@@ -198,18 +198,6 @@
             this.label_matkhau.Text = "Mật khẩu";
             this.label_matkhau.Click += new System.EventHandler(this.label_matkhau_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.pictureBox1.Image = global::GUI.Properties.Resources.Streamlineicons_Streamline_Ux_Free_Doctor_hospital_512;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 21);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(377, 319);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // DangNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -225,9 +213,9 @@
             this.Text = "DangNhap";
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -244,7 +232,6 @@
         private System.Windows.Forms.Button button_thoat;
         private System.Windows.Forms.CheckBox checkBox_hienthi;
         private System.Windows.Forms.LinkLabel linkLabel_dangki;
-        private System.Windows.Forms.LinkLabel linkLabel_quenmatkhau;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox2;

@@ -45,23 +45,42 @@ namespace DAL
         // Thêm mới một mục tiêu vào bảng ChieuCaoVaCanNang
         public bool Add(ChieuCaoVaCanNangDTO target)
         {
-            string query = "INSERT INTO ChieuCaoVaCanNang (MaPhieu, thoiGian, chieuCao, canNang) VALUES (@MaPhieu, @ThoiGian, @ChieuCao, @CanNang)";
+            string query = @"INSERT INTO ChieuCaoVaCanNang (thoiGian, chieuCao, canNang) VALUES (@ThoiGian, @ChieuCao, @CanNang)";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.Add("@MaPhieu", SqlDbType.Int).Value = target.MaPhieu;
-                cmd.Parameters.Add("@ThoiGian", SqlDbType.NVarChar).Value = target.ThoiGian;
+
+                // Đảm bảo các tham số được truyền vào đúng
+                //cmd.Parameters.Add("@MaPhieu", SqlDbType.Int).Value = target.MaPhieu;
+                cmd.Parameters.Add("@ThoiGian", SqlDbType.Int).Value = int.TryParse(target.ThoiGian, out int soNgay) ? soNgay : 0;
                 cmd.Parameters.Add("@ChieuCao", SqlDbType.Float).Value = target.ChieuCao;
                 cmd.Parameters.Add("@CanNang", SqlDbType.Float).Value = target.CanNang;
 
                 try
                 {
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0;
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Thêm mục tiêu thành công.");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Không có mục tiêu nào được thêm.");
+                        return false;
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    // Ghi log lỗi SQL để dễ dàng theo dõi
+                    Console.WriteLine($"Lỗi SQL: {sqlEx.Message}, Stack Trace: {sqlEx.StackTrace}");
+                    return false;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Lỗi khi thêm mục tiêu: {ex.Message}");
+                    // Ghi log lỗi hệ thống để dễ dàng theo dõi
+                    Console.WriteLine($"Lỗi hệ thống: {ex.Message}, Stack Trace: {ex.StackTrace}");
                     return false;
                 }
             }

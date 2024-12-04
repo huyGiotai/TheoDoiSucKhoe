@@ -95,7 +95,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(976, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(976, 29);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -104,31 +104,34 @@
             this.mnu_dangxuat.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.mnu_dangxuat.Image = global::GUI.Properties.Resources.Custom_Icon_Design_Pretty_Office_11_Logout_24;
             this.mnu_dangxuat.Name = "mnu_dangxuat";
-            this.mnu_dangxuat.Size = new System.Drawing.Size(142, 26);
+            this.mnu_dangxuat.Size = new System.Drawing.Size(142, 25);
             this.mnu_dangxuat.Text = "Đăng xuất  ";
+            this.mnu_dangxuat.Click += new System.EventHandler(this.mnu_dangxuat_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.toolStripMenuItem1.Image = global::GUI.Properties.Resources.Dtafalonso_Ios8_Health_24;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 25);
             this.toolStripMenuItem1.Text = "Phiếu sức khỏe  ";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.toolStripMenuItem2.Image = global::GUI.Properties.Resources.Gartoon_Team_Gartoon_Misc_Seahorse_Applet_Signed_24;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(132, 26);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(132, 25);
             this.toolStripMenuItem2.Text = "Mục tiêu   ";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.toolStripMenuItem3.Image = global::GUI.Properties.Resources.Inipagi_Business_Economic_Checklist_24;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(139, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(139, 25);
             this.toolStripMenuItem3.Text = "Báo cáo     ";
             // 
             // toolStripMenuItem4
@@ -136,7 +139,7 @@
             this.toolStripMenuItem4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.toolStripMenuItem4.Image = global::GUI.Properties.Resources.Alecive_Flatwoken_Apps_Notifications_24;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(148, 26);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(148, 25);
             this.toolStripMenuItem4.Text = "Nhắc nhở    ";
             // 
             // toolStripMenuItem5
@@ -144,8 +147,9 @@
             this.toolStripMenuItem5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.toolStripMenuItem5.Image = global::GUI.Properties.Resources.Saki_NuoveXT_2_Apps_session_logout_24;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(93, 26);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(93, 25);
             this.toolStripMenuItem5.Text = "Thoát";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // panel1
             // 
@@ -157,6 +161,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(941, 77);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 

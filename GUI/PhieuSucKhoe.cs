@@ -74,7 +74,9 @@ namespace GUI
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-
+            MucTieu muctieu = new MucTieu();
+            muctieu.Show();
+            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -385,6 +387,11 @@ namespace GUI
         private void mnu_thoat_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void mnu_phieusuckhoe_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

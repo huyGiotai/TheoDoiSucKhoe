@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DAL;
 using DTO;
 
@@ -40,19 +42,41 @@ namespace BLL
         {
             if (target == null)
             {
-                Console.WriteLine("Mục tiêu không hợp lệ.");
+                Console.WriteLine("Mục tiêu không hợp lệ. Đối tượng null.");
+                MessageBox.Show("Mục tiêu không hợp lệ. Vui lòng thử lại.");
                 return false;
             }
 
             try
             {
-                return chieuCaoVaCanNangDAL.Add(target);
+                bool result = chieuCaoVaCanNangDAL.Add(target);
+                if (result)
+                {
+                    MessageBox.Show("Thêm mục tiêu thành công.");
+                    Console.WriteLine("Thêm mục tiêu thành công.");
+                }
+                else
+                {
+                    MessageBox.Show("Thêm mục tiêu thất bại. Không có bản ghi nào được thêm.");
+                    Console.WriteLine("Thêm mục tiêu thất bại. Không có bản ghi nào được thêm.");
+                }
+                return result;
+            }
+            catch (SqlException sqlEx)
+            {
+                string errorMessage = $"Lỗi cơ sở dữ liệu: {sqlEx.Message}.";
+                MessageBox.Show(errorMessage);
+                Console.WriteLine(errorMessage);
+                // Bạn có thể ghi lại lỗi này vào file log hoặc database để theo dõi.
+                throw new Exception("Lỗi khi thêm mục tiêu vào cơ sở dữ liệu.", sqlEx);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi khi thêm mục tiêu: {ex.Message}");
-                // Có thể ghi log và ném lại lỗi
-                throw new Exception("Lỗi khi thêm mục tiêu.", ex);
+                string errorMessage = $"Lỗi hệ thống: {ex.Message}.";
+                MessageBox.Show(errorMessage);
+                Console.WriteLine(errorMessage);
+                // Ghi lại lỗi vào log file nếu cần.
+                throw new Exception("Đã xảy ra lỗi khi thêm mục tiêu.", ex);
             }
         }
 
@@ -97,23 +121,41 @@ namespace BLL
             if (completedTarget == null)
             {
                 Console.WriteLine("Mục tiêu hoàn thành không hợp lệ.");
+                MessageBox.Show("Mục tiêu hoàn thành không hợp lệ.");
                 return false;
             }
 
             try
             {
+                // Thêm vào bảng MucTieuHoanThanh mà không xóa mục tiêu
                 bool isAdded = mucTieuHoanThanhDAL.Add(completedTarget);
                 if (isAdded)
                 {
-                    bool isDeleted = chieuCaoVaCanNangDAL.Delete(targetId);
-                    return isDeleted;
+                    Console.WriteLine("Mục tiêu đã hoàn thành.");
+                    return true;
                 }
+                else
+                {
+                    Console.WriteLine("Lỗi khi thêm mục tiêu hoàn thành.");
+                    MessageBox.Show("Lỗi khi thêm mục tiêu hoàn thành.");
+                    return false;
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Ghi log lỗi SQL
+                string errorMessage = $"Lỗi cơ sở dữ liệu: {sqlEx.Message}, Stack Trace: {sqlEx.StackTrace}";
+                Console.WriteLine(errorMessage);
+                MessageBox.Show($"Lỗi cơ sở dữ liệu: {sqlEx.Message}");
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi khi hoàn thành mục tiêu: {ex.Message}");
-                throw new Exception("Lỗi khi hoàn thành mục tiêu.", ex);
+                // Ghi log lỗi hệ thống
+                string errorMessage = $"Lỗi hệ thống: {ex.Message}, Stack Trace: {ex.StackTrace}";
+                Console.WriteLine(errorMessage);
+                MessageBox.Show($"Lỗi hệ thống: {ex.Message}");
+                return false;
             }
         }
 
