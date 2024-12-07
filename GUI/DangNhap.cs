@@ -45,7 +45,9 @@ namespace GUI
 
         private void linkLabel_dangki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            this.Hide();
+            DangKy mainForm = new DangKy();
+            mainForm.Show();
         }
 
         private void button_thoat_Click(object sender, EventArgs e)

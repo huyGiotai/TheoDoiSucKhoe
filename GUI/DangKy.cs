@@ -1,170 +1,118 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Windows.Forms;
-using System.Data.SqlClient; // Dùng để kết nối SQL
-using DTO;  // Thêm namespace chứa các lớp DTO
-using BLL;
 
 namespace GUI
 {
     public partial class DangKy : Form
     {
-        private readonly DangKyBLL _DangKyBLL = new DangKyBLL();
         public DangKy()
         {
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        // Sự kiện khi nhấn nút "Đăng nhập"
+        private void button_dangnhap_Click(object sender, EventArgs e)
         {
-
+            // Thực hiện đăng nhập tại đây
+            this.Hide();
+            DangNhap mainForm = new DangNhap();
+            mainForm.Show();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label_matkhau_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel_dangki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
+        // Sự kiện khi nhấn nút "Đăng ký"
         private void button_Dangky_Click(object sender, EventArgs e)
         {
+            // Lấy dữ liệu từ các TextBox
             string taiKhoan = textBox_taikhoan.Text.Trim();
             string matKhau = textBox_matkhau.Text.Trim();
             string nhapLaiMatKhau = text_Nhaplainmk.Text.Trim();
 
-            // Kiểm tra các trường hợp
-            if (string.IsNullOrEmpty(taiKhoan) || string.IsNullOrEmpty(matKhau) || string.IsNullOrEmpty(nhapLaiMatKhau))
-            {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            // Kiểm tra nếu mật khẩu và nhập lại mật khẩu giống nhau
             if (matKhau != nhapLaiMatKhau)
             {
-                MessageBox.Show("Mật khẩu không khớp, vui lòng nhập lại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Mật khẩu và nhập lại mật khẩu không khớp!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            try
+            // Sử dụng lớp BLL để đăng ký
+            DangKyBLL dangKyBLL = new DangKyBLL();
+            bool isUserExist = dangKyBLL.CheckIfUserExists(taiKhoan);
+
+            if (isUserExist)
             {
-                // Chuỗi kết nối tới cơ sở dữ liệu
-                string connectionString = @"Data Source=NGUYENMSI\SQLEXPRESS;Initial Catalog=QuanLySucKhoe;Integrated Security=True";
-
-                // Tạo kết nối
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    // Kiểm tra xem tài khoản đã tồn tại chưa
-                    string checkUserQuery = "SELECT COUNT(*) FROM [User] WHERE TaiKhoan = @TaiKhoan";
-                    using (SqlCommand checkUserCmd = new SqlCommand(checkUserQuery, connection))
-                    {
-                        checkUserCmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
-                        int userExists = (int)checkUserCmd.ExecuteScalar();
-
-                        if (userExists > 0)
-                        {
-                            MessageBox.Show("Tài khoản đã tồn tại. Vui lòng chọn tên tài khoản khác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                    }
-
-                    // Thêm tài khoản mới vào bảng User
-                    string insertQuery = "INSERT INTO [User] (TaiKhoan, MatKhau) VALUES (@TaiKhoan, @MatKhau)";
-                    using (SqlCommand insertCmd = new SqlCommand(insertQuery, connection))
-                    {
-                        insertCmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
-                        insertCmd.Parameters.AddWithValue("@MatKhau", matKhau);
-
-                        int rowsAffected = insertCmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            // Xóa các ô nhập
-                            textBox_taikhoan.Clear();
-                            textBox_matkhau.Clear();
-                            text_Nhaplainmk.Clear();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Đăng ký thất bại, vui lòng thử lại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
+                MessageBox.Show("Tài khoản đã tồn tại, vui lòng chọn tài khoản khác!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (Exception ex)
+
+            // Nếu tài khoản chưa tồn tại, tiến hành đăng ký
+            bool isSuccess = dangKyBLL.RegisterUser(taiKhoan, matKhau);
+            if (isSuccess)
             {
-                MessageBox.Show($"Có lỗi xảy ra: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra trong quá trình đăng ký!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        private void groupBox2_Enter(object sender, EventArgs e)
+    // Sự kiện khi thay đổi nội dung ô nhập tài khoản
+    private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            // Kiểm tra tài khoản nhập vào
         }
 
-        private void label_taikhoan_Click(object sender, EventArgs e)
+        // Sự kiện khi thay đổi nội dung ô nhập mật khẩu
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            // Kiểm tra mật khẩu nhập vào
         }
 
+        // Sự kiện khi thay đổi trạng thái checkbox "Hiển thị mật khẩu"
         private void checkBox_hienthi_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox_hienthi.Checked)
             {
-                textBox_matkhau.PasswordChar = '\0'; // Hiển thị mật khẩu
+                // Hiển thị mật khẩu
+                textBox_matkhau.PasswordChar = '\0';
                 text_Nhaplainmk.PasswordChar = '\0';
             }
             else
             {
-                textBox_matkhau.PasswordChar = '*'; // Ẩn mật khẩu
+                // Ẩn mật khẩu
+                textBox_matkhau.PasswordChar = '*';
                 text_Nhaplainmk.PasswordChar = '*';
             }
         }
 
-
-        private void button_dangnhap_Click(object sender, EventArgs e)
+        // Sự kiện khi nhấn vào label tài khoản
+        private void label_taikhoan_Click(object sender, EventArgs e)
         {
-            // Tạo một đối tượng của form DangNhap
-            DangNhap formDangNhap = new DangNhap();
-
-            // Ẩn form hiện tại nếu bạn muốn chỉ hiển thị form đăng nhập
-            this.Hide(); // Ẩn form hiện tại
-
-            // Hiển thị form DangNhap
-            formDangNhap.ShowDialog();  // Dùng ShowDialog để mở form đăng nhập dưới dạng modal (chờ người dùng đóng form đăng nhập)
-
-            // Hoặc nếu bạn muốn mở form đăng nhập mà không đóng form hiện tại:
-            // formDangNhap.Show();
+            // Thực hiện hành động khi click vào label tài khoản
         }
+
+        // Sự kiện khi nhấn vào label mật khẩu
+        private void label_matkhau_Click(object sender, EventArgs e)
+        {
+            // Thực hiện hành động khi click vào label mật khẩu
+        }
+
+        // Sự kiện khi nhấn vào label nhập lại mật khẩu
         private void label1_Click(object sender, EventArgs e)
         {
-
+            // Thực hiện hành động khi click vào label nhập lại mật khẩu
         }
 
-        private void DangKy_Load(object sender, EventArgs e)
+        // Sự kiện khi nhấn vào hình ảnh
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            // Thực hiện hành động khi click vào hình ảnh
         }
 
-        private void DangKy_Load_1(object sender, EventArgs e)
+        // Sự kiện khi groupBox2 được focus
+        private void groupBox2_Enter(object sender, EventArgs e)
         {
-
+            // Thực hiện hành động khi groupBox2 được focus
         }
     }
 }

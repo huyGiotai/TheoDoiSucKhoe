@@ -49,5 +49,12 @@ namespace GUI
         {
 
         }
+
+        private void buttonquaylai_Click(object sender, EventArgs e)
+        {
+            PhieuSucKhoe phieuSucKhoe = new PhieuSucKhoe();
+            phieuSucKhoe.Show();
+            this.Hide();
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace DAL
 
     public class UserDAL
     {
-        private readonly string connectionString = "Data Source=HUY\\MSSQLSERVER10;Initial Catalog=QuanLySucKhoe;Integrated Security=True;";
+        private readonly string connectionString = "Data Source=NGUYENMSI\\SQLEXPRESS;Initial Catalog=QuanLySucKhoe;Integrated Security=True;";
         /// <summary>
         /// Xác thực người dùng bằng cách kiểm tra tên đăng nhập và mật khẩu đã mã hóa trong cơ sở dữ liệu.
         /// </summary>

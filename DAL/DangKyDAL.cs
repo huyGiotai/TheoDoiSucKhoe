@@ -1,56 +1,94 @@
 ﻿using System;
 using System.Data.SqlClient;
-using DTO;
+using System.IO;
 
 namespace DAL
 {
     public class DangKyDAL
     {
-        private readonly string _connectionString = @"Data Source=NGUYENMSI\SQLEXPRESS;Initial Catalog=QuanLySucKhoe;Integrated Security=True";
+        // Chuỗi kết nối tới cơ sở dữ liệu
+        private string connectionString = @"Data Source=NGUYENMSI\SQLEXPRESS;Initial Catalog=QuanLySucKhoe;Integrated Security=True";
 
-        // Kiểm tra xem tài khoản đã tồn tại
-        public bool IsUserExists(string username)
+        // Phương thức kiểm tra người dùng có tồn tại trong cơ sở dữ liệu không
+        public bool CheckIfUserExists(string taiKhoan)
         {
+            bool userExists = false;
+
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT COUNT(*) FROM [user] WHERE username = @Username";
+
+                    // Sửa lại câu truy vấn để sử dụng cột 'username' thay vì 'TaiKhoan'
+                    string query = "SELECT COUNT(*) FROM [user] WHERE username = @TaiKhoan";
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
                         int count = (int)cmd.ExecuteScalar();
-                        return count > 0;
+                        userExists = count > 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Có lỗi xảy ra khi kiểm tra tài khoản: " + ex.Message);
+                // Ghi lại lỗi vào file log
+                LogError(ex);
+                // Ném lại ngoại lệ với thông tin chi tiết hơn
+                throw new Exception("Có lỗi khi kiểm tra người dùng: " + ex.Message + "\n" + ex.StackTrace, ex);
+            }
+
+            return userExists;
+        }
+
+        // Phương thức để thêm người dùng mới vào cơ sở dữ liệu
+        public bool InsertUser(string taiKhoan, string matKhau)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Sửa lại câu truy vấn để sử dụng cột 'username' và 'password'
+                    string query = "INSERT INTO [user] (username, password) VALUES (@TaiKhoan, @MatKhau)";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
+                        cmd.Parameters.AddWithValue("@MatKhau", matKhau);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Ghi lại lỗi vào file log
+                LogError(ex);
+                // Ném lại ngoại lệ với thông tin chi tiết hơn
+                throw new Exception("Có lỗi khi đăng ký người dùng: " + ex.Message + "\n" + ex.StackTrace, ex);
             }
         }
 
-        // Thêm người dùng mới
-        public bool AddUser(UserDTO user)
+        // Phương thức ghi log lỗi vào file
+        private void LogError(Exception ex)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                string logFilePath = @"C:\Logs\error_log.txt";  // Đường dẫn file log
+                using (StreamWriter writer = new StreamWriter(logFilePath, true))
                 {
-                    connection.Open();
-                    string query = "INSERT INTO [user] (username, password) VALUES (@Username, @Password)";
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@Username", user.Username);
-                        cmd.Parameters.AddWithValue("@Password", user.Password);
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
+                    writer.WriteLine("Time: " + DateTime.Now);
+                    writer.WriteLine("Error Message: " + ex.Message);
+                    writer.WriteLine("Stack Trace: " + ex.StackTrace);
+                    writer.WriteLine("--------------------------------------------------");
                 }
             }
-            catch (Exception ex)
+            catch (Exception logEx)
             {
-                throw new Exception("Có lỗi xảy ra khi thêm người dùng: " + ex.Message);
+                // Nếu có lỗi khi ghi log, bạn có thể xử lý lỗi này ở đây (ví dụ, ghi vào EventLog hoặc ghi vào một file khác)
+                Console.WriteLine("Error logging the exception: " + logEx.Message);
             }
         }
     }

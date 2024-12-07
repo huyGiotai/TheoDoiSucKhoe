@@ -128,6 +128,7 @@ namespace GUI
             this.mnu_baocao.Name = "mnu_baocao";
             this.mnu_baocao.Size = new System.Drawing.Size(144, 25);
             this.mnu_baocao.Text = "Báo cáo      ";
+            this.mnu_baocao.Click += new System.EventHandler(this.mnu_baocao_Click);
             // 
             // mnu_nhacnho
             // 
@@ -136,6 +137,7 @@ namespace GUI
             this.mnu_nhacnho.Name = "mnu_nhacnho";
             this.mnu_nhacnho.Size = new System.Drawing.Size(158, 25);
             this.mnu_nhacnho.Text = "Nhắc nhở      ";
+            this.mnu_nhacnho.Click += new System.EventHandler(this.mnu_nhacnho_Click);
             // 
             // mnu_thoat
             // 

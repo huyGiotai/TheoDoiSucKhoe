@@ -11,7 +11,7 @@ namespace DAL
 {
     public class ChieuCaoVaCanNangDAL
     {
-        private readonly string connectionString = "Data Source=HUY\\MSSQLSERVER10;Initial Catalog=QuanLySucKhoe;Integrated Security=True;";
+        private readonly string connectionString = "Data Source=NGUYENMSI\\SQLEXPRESS;Initial Catalog=QuanLySucKhoe;Integrated Security=True;";
 
         // Lấy tất cả dữ liệu từ bảng ChieuCaoVaCanNang
         public List<ChieuCaoVaCanNangDTO> GetAll()

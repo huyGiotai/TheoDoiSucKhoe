@@ -30,6 +30,7 @@ namespace GUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DangKy));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label_dangnahp = new System.Windows.Forms.Label();
             this.textBox_taikhoan = new System.Windows.Forms.TextBox();
@@ -40,10 +41,10 @@ namespace GUI
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.text_Nhaplainmk = new System.Windows.Forms.TextBox();
+            this.label_nhaplaimk = new System.Windows.Forms.Label();
             this.label_taikhoan = new System.Windows.Forms.Label();
             this.label_matkhau = new System.Windows.Forms.Label();
-            this.label_nhaplaimk = new System.Windows.Forms.Label();
-            this.text_Nhaplainmk = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -166,6 +167,27 @@ namespace GUI
             this.groupBox2.Text = "Thông tin đăng nhập";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // text_Nhaplainmk
+            // 
+            this.text_Nhaplainmk.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.text_Nhaplainmk.Location = new System.Drawing.Point(233, 177);
+            this.text_Nhaplainmk.Multiline = true;
+            this.text_Nhaplainmk.Name = "text_Nhaplainmk";
+            this.text_Nhaplainmk.PasswordChar = '*';
+            this.text_Nhaplainmk.Size = new System.Drawing.Size(274, 43);
+            this.text_Nhaplainmk.TabIndex = 10;
+            // 
+            // label_nhaplaimk
+            // 
+            this.label_nhaplaimk.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label_nhaplaimk.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label_nhaplaimk.Location = new System.Drawing.Point(-5, 179);
+            this.label_nhaplaimk.Name = "label_nhaplaimk";
+            this.label_nhaplaimk.Size = new System.Drawing.Size(221, 41);
+            this.label_nhaplaimk.TabIndex = 9;
+            this.label_nhaplaimk.Text = "NHập Lại Mật khẩu";
+            this.label_nhaplaimk.Click += new System.EventHandler(this.label1_Click);
+            // 
             // label_taikhoan
             // 
             this.label_taikhoan.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -188,28 +210,7 @@ namespace GUI
             this.label_matkhau.Text = "Mật khẩu";
             this.label_matkhau.Click += new System.EventHandler(this.label_matkhau_Click);
             // 
-            // label_nhaplaimk
-            // 
-            this.label_nhaplaimk.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label_nhaplaimk.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.label_nhaplaimk.Location = new System.Drawing.Point(-5, 179);
-            this.label_nhaplaimk.Name = "label_nhaplaimk";
-            this.label_nhaplaimk.Size = new System.Drawing.Size(221, 41);
-            this.label_nhaplaimk.TabIndex = 9;
-            this.label_nhaplaimk.Text = "NHập Lại Mật khẩu";
-            this.label_nhaplaimk.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // text_Nhaplainmk
-            // 
-            this.text_Nhaplainmk.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.text_Nhaplainmk.Location = new System.Drawing.Point(233, 177);
-            this.text_Nhaplainmk.Multiline = true;
-            this.text_Nhaplainmk.Name = "text_Nhaplainmk";
-            this.text_Nhaplainmk.PasswordChar = '*';
-            this.text_Nhaplainmk.Size = new System.Drawing.Size(274, 43);
-            this.text_Nhaplainmk.TabIndex = 10;
-            // 
-            // DangNhap
+            // DangKy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -219,8 +220,9 @@ namespace GUI
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
-            this.Name = "DangNhap";
-            this.Text = "DangNhap";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "DangKy";
+            this.Text = "DangKy";
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

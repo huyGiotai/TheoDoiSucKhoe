@@ -393,5 +393,19 @@ namespace GUI
         {
 
         }
+
+        private void mnu_baocao_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BaoCao mainForm = new BaoCao();
+            mainForm.Show();
+        }
+
+        private void mnu_nhacnho_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Loikhuyen mainForm = new Loikhuyen();
+            mainForm.Show();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace DAL
 {
     public class MucTieuHoanThanhDAL
     {
-        private readonly string connectionString = "Data Source=HUY\\MSSQLSERVER10;Initial Catalog=QuanLySucKhoe;Integrated Security=True;";
+        private readonly string connectionString = "Data Source=NGUYENMSI\\SQLEXPRESS;Initial Catalog=QuanLySucKhoe;Integrated Security=True;";
 
         // Lấy tất cả dữ liệu từ bảng MucTieuHoanThanh
         public List<MucTieuHoanThanhDTO> GetAll()

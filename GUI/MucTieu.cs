@@ -335,5 +335,19 @@ namespace GUI
         {
 
         }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Loikhuyen mainForm = new Loikhuyen();
+            mainForm.Show();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BaoCao mainForm = new BaoCao();
+            mainForm.Show();
+        }
     }
 }
