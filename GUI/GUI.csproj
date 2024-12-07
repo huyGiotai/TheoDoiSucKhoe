@@ -64,6 +64,12 @@
     <Compile Include="DangNhap.Designer.cs">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Loikhuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loikhuyen.Designer.cs">
+      <DependentUpon>Loikhuyen.cs</DependentUpon>
+    </Compile>
     <Compile Include="MucTieu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loikhuyen.resx">
+      <DependentUpon>Loikhuyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MucTieu.resx">
       <DependentUpon>MucTieu.cs</DependentUpon>

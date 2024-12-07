@@ -90,5 +90,10 @@ namespace GUI
         {
             textBox_matkhau.UseSystemPasswordChar = checkBox_hienthi.Checked;
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

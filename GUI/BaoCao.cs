@@ -123,31 +123,31 @@ namespace GUI
                     return;
                 }
 
-                // Hiển thị các chỉ số vào các TextBox
-                textBox_timchieucao.Text = baoCaoData.Height.ToString();
-                textBox_timcannang.Text = baoCaoData.Weight.ToString();
-                textBox_timnhietdo.Text = baoCaoData.Temperature.ToString();
-                texttimttct.Text = baoCaoData.BodyStatus;
-                textBoxtimHuyetap.Text = baoCaoData.BloodPressure.ToString();
-                textBoxtimnhiptim.Text = baoCaoData.HeartRate.ToString();
+                // Hiển thị dữ liệu lên các TextBox
+                textBox_timchieucao.Text = baoCaoData.ChieuCao.ToString();
+                textBox_timcannang.Text = baoCaoData.CanNang.ToString();
+                textBox_timnhietdo.Text = baoCaoData.NhietDoCoThe.ToString();
+                textBoxtimHuyetap.Text = baoCaoData.HuyetAp;
+                textBoxtimnhiptim.Text = baoCaoData.NhipTim.ToString();
 
                 // Tính và hiển thị BMI
-                float bmi = baoCaoBLL.CalculateBMI(baoCaoData.Height, baoCaoData.Weight);
+                float bmi = baoCaoBLL.CalculateBMI(baoCaoData.ChieuCao, baoCaoData.CanNang);
                 textBMI.Text = bmi.ToString("0.0");
 
                 // Hiển thị trạng thái BMI
                 texthienthi.Text = baoCaoBLL.GetBMIStatus(bmi);
 
                 // Hiển thị trạng thái huyết áp, nhịp tim và nhiệt độ
-                textBaocaohuyetap.Text = baoCaoBLL.GetBloodPressureStatus(baoCaoData.BloodPressure);
-                textbaocaonhiptim.Text = baoCaoBLL.GetHeartRateStatus(baoCaoData.HeartRate);
-                textbaocaonhietdocothe.Text = baoCaoBLL.GetTemperatureStatus(baoCaoData.Temperature);
+                textBaocaohuyetap.Text = baoCaoBLL.GetBloodPressureStatus(baoCaoData.HuyetAp);
+                textbaocaonhiptim.Text = baoCaoBLL.GetHeartRateStatus(baoCaoData.NhipTim);
+                textbaocaonhietdocothe.Text = baoCaoBLL.GetTemperatureStatus(baoCaoData.NhietDoCoThe);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
             }
         }
+
 
 
         private void textBox_timcannang_TextChanged(object sender, EventArgs e)

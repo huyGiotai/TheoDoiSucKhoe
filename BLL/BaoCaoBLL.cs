@@ -1,61 +1,64 @@
-﻿using DAL;
+﻿using System;
+using DAL;
 using DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BLL
 {
     public class BaoCaoBLL
     {
-        private BaoCaoDAL _baoCaoDAL;
+        private BaoCaoDAL baoCaoDAL;
 
         public BaoCaoBLL()
         {
-            _baoCaoDAL = new BaoCaoDAL();
+            baoCaoDAL = new BaoCaoDAL();
         }
 
-        public BaoCaoDTO GetBaoCaoData(DateTime date)
+        public BaoCaoDTO GetBaoCaoData(DateTime ngay)
         {
-            return _baoCaoDAL.GetBaoCaoDataByDate(date);
+            return baoCaoDAL.GetBaoCaoByDate(ngay);
         }
 
-        public float CalculateBMI(float height, float weight)
+        public float CalculateBMI(double height, double weight)
         {
-            return weight / (height * height);
+            if (height <= 0) return 0;
+            return (float)(weight / ((height / 100) * (height / 100))); // Chiều cao tính bằng cm -> m
         }
 
         public string GetBMIStatus(float bmi)
         {
-            if (bmi < 18.5) return "Underweight";
-            if (bmi < 24.9) return "Normal weight";
-            if (bmi < 29.9) return "Overweight";
-            return "Obesity";
+            if (bmi < 18.5) return "Thiếu cân";
+            else if (bmi >= 18.5 && bmi < 24.9) return "Bình thường";
+            else if (bmi >= 25 && bmi < 29.9) return "Thừa cân";
+            else return "Béo phì";
         }
 
-        public string GetBloodPressureStatus(float bloodPressure)
+        public string GetBloodPressureStatus(string bloodPressure)
         {
-            if (bloodPressure < 120) return "Normal";
-            if (bloodPressure < 130) return "Elevated";
-            if (bloodPressure < 140) return "Hypertension Stage 1";
-            return "Hypertension Stage 2";
+            // Giả sử định dạng "120/80"
+            string[] parts = bloodPressure.Split('/');
+            if (parts.Length != 2) return "Không xác định";
+
+            int systolic = int.Parse(parts[0]);
+            int diastolic = int.Parse(parts[1]);
+
+            if (systolic < 90 || diastolic < 60) return "Huyết áp thấp";
+            if (systolic > 140 || diastolic > 90) return "Huyết áp cao";
+            return "Huyết áp bình thường";
         }
 
         public string GetHeartRateStatus(int heartRate)
         {
-            if (heartRate < 60) return "Low";
-            if (heartRate <= 100) return "Normal";
-            return "High";
+            if (heartRate < 60) return "Nhịp tim thấp";
+            if (heartRate > 100) return "Nhịp tim cao";
+            return "Nhịp tim bình thường";
         }
 
-        public string GetTemperatureStatus(float temperature)
+        public string GetTemperatureStatus(double temperature)
         {
-            if (temperature < 36) return "Hypothermia";
-            if (temperature < 37.5) return "Normal";
-            return "Fever";
+            if (temperature < 36.0) return "Hạ thân nhiệt";
+            if (temperature > 37.5) return "Sốt";
+            return "Nhiệt độ bình thường";
         }
     }
-
 }
